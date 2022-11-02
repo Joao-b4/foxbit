@@ -1,6 +1,6 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
-class DefaultTestObserver implements Observer<dynamic> {
+class DefaultTestObserver<T> implements Observer<T> {
   bool ended = false;
   bool done = false;
   bool error = false;

@@ -31,9 +31,9 @@ class CryptocurrencyModel extends CryptocurrencyEntity {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'instrumentId': instrumentId,
-      'symbol': symbol,
-      'sortIndex': sortIndex,
+      'InstrumentId': instrumentId,
+      'Symbol': symbol,
+      'SortIndex': sortIndex,
     };
   }
 

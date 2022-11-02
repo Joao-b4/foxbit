@@ -4,6 +4,7 @@ import 'package:foxbit_hiring_test_template/data/helpers/websocket.dart';
 import 'package:foxbit_hiring_test_template/data/repositories/cryptocurrency_repository.dart';
 
 import '../mocks/get_instruments_mock.dart';
+import '../mocks/subscribe_level1_mock.dart';
 
 class TestFoxbitWebSocket extends FoxbitWebSocket {
   List<String> sendedMessages = [];
@@ -11,7 +12,9 @@ class TestFoxbitWebSocket extends FoxbitWebSocket {
   final Map responses = {
     // ignore: unnecessary_string_escapes
     'PING': '{"m": 0, "i": 0, "n": "Ping", "o": "{\\\"msg\\\":\\\"PONG\\\"}" }',
-    WSEventNameMapper.getAll: getInstrumentsResponseMock
+    WSEventNameMapper.getAll: getInstrumentsResponseMock,
+    WSEventNameMapper.subscribeCryptocurrencyQuoteByCryptocurrencyId[0]:
+        getSubscribeLeve1ResponseMock,
   };
 
   @override

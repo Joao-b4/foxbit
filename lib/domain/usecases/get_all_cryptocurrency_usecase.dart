@@ -25,6 +25,6 @@ class GetAllCryptocurrencyUseCase
       controller.close();
     }
 
-    return Stream.castFrom(controller.stream);
+    return controller.stream;
   }
 }

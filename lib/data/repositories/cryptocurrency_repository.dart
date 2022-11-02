@@ -1,6 +1,8 @@
 import 'package:foxbit_hiring_test_template/data/helpers/websocket.dart';
 import 'package:foxbit_hiring_test_template/data/models/cryptocurrency_model.dart';
+import 'package:foxbit_hiring_test_template/data/models/cryptocurrency_quote_model.dart';
 import 'package:foxbit_hiring_test_template/domain/entities/cryptocurrency_entity.dart';
+import 'package:foxbit_hiring_test_template/domain/entities/cryptocurrency_quote_entity.dart';
 import 'package:foxbit_hiring_test_template/domain/repositories/cryptocurrency_repository.dart';
 
 class CryptocurrencyRepository implements ICryptocurrencyRepository {
@@ -27,17 +29,35 @@ class CryptocurrencyRepository implements ICryptocurrencyRepository {
   }
 
   @override
-  Future<Map> getQuoteByCryptocurrencyId(int cryptocurrencyId) {
-    // TODO: implement getQuoteByCryptocurrencyId
-    throw UnimplementedError();
+  Stream<CryptocurrencyQuoteEntity>
+      subscribeCryptocurrencyQuoteByCryptocurrencyId(int cryptocurrencyId) {
+    try {
+      _websocket.send(
+          WSEventNameMapper.subscribeCryptocurrencyQuoteByCryptocurrencyId[0],
+          {"InstrumentId": cryptocurrencyId});
+      //todo: criar extensão para o .stream que faça firstWhere
+      final resultFiltered = _websocket.stream.where((message) {
+        return WSEventNameMapper.subscribeCryptocurrencyQuoteByCryptocurrencyId
+            .contains(message['n'].toString());
+      });
+
+      final resultMapToResponse = resultFiltered.map((map) => map['o'] as Map);
+
+      final streamMappedToCryptocurrencyQuoteModel = resultMapToResponse
+          .map((map) => CryptocurrencyQuoteModel.fromMap(map));
+
+      return streamMappedToCryptocurrencyQuoteModel;
+    } catch (error) {
+      throw Exception(error);
+    }
   }
 }
 
 //todo: mover para constants.dart
 class WSEventNameMapper {
   static const getAll = 'getInstruments';
-}
-
-void main() {
-  CryptocurrencyRepository(FoxbitWebSocket()).getAll();
+  static const subscribeCryptocurrencyQuoteByCryptocurrencyId = [
+    'SubscribeLevel1',
+    'Level1UpdateEvent'
+  ];
 }

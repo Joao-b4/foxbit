@@ -10,8 +10,21 @@ import 'package:foxbit_hiring_test_template/domain/usecases/heartbeat_usecase.da
 
 class HomePresenter extends Presenter {
   final FoxbitWebSocket webSocket;
+  CryptocurrencyRepository _cryptocurrencyRepository;
+  GetAllCryptocurrencyUseCase _getAllCryptocurrencyUseCase;
+  GetCryptocurrencyQuoteByCryptocurrencyIdUseCase
+      _getCryptocurrencyQuoteByCryptocurrencyIdUseCase;
+  final HeartbeatUseCase _heartbeatUseCase =
+      HeartbeatUseCase(HeartbeatRepository());
+
   HomePresenter() : webSocket = FoxbitWebSocket() {
     webSocket.connect();
+    _cryptocurrencyRepository = CryptocurrencyRepository(webSocket);
+    _getAllCryptocurrencyUseCase =
+        GetAllCryptocurrencyUseCase(_cryptocurrencyRepository);
+    _getCryptocurrencyQuoteByCryptocurrencyIdUseCase =
+        GetCryptocurrencyQuoteByCryptocurrencyIdUseCase(
+            _cryptocurrencyRepository);
   }
 
   Function heartbeatOnComplete;
@@ -25,17 +38,6 @@ class HomePresenter extends Presenter {
   Function(CryptocurrencyQuoteEntity)
       getCryptocurrencyQuoteByCryptocurrencyIdOnNext;
   Function(dynamic) getCryptocurrencyQuoteByCryptocurrencyIdOnError;
-
-  HeartbeatUseCase get _heartbeatUseCase =>
-      HeartbeatUseCase(HeartbeatRepository());
-
-  GetAllCryptocurrencyUseCase get _getAllCryptocurrencyUseCase =>
-      GetAllCryptocurrencyUseCase(CryptocurrencyRepository(webSocket));
-
-  GetCryptocurrencyQuoteByCryptocurrencyIdUseCase
-      get _getCryptocurrencyQuoteByCryptocurrencyIdUseCase =>
-          GetCryptocurrencyQuoteByCryptocurrencyIdUseCase(
-              CryptocurrencyRepository(webSocket));
 
   void sendHeartbeat() {
     _heartbeatUseCase.execute(_HeartBeatObserver(this), webSocket);

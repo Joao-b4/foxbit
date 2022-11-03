@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:foxbit_hiring_test_template/app/pages/home/home_controller.dart';
 import 'package:foxbit_hiring_test_template/app/resources/application_dimens.dart';
+import 'package:foxbit_hiring_test_template/app/resources/application_strings.dart';
 import 'package:foxbit_hiring_test_template/app/widgets/cryptocurrency_description_widget.dart';
 import 'package:foxbit_hiring_test_template/app/widgets/cryptocurrency_px_value_changed_widget.dart';
 import 'package:foxbit_hiring_test_template/app/widgets/cryptocurrency_value_widget.dart';
@@ -15,9 +16,6 @@ class HomePage extends View {
 
 class HomePageState extends ViewState<HomePage, HomeController> {
   HomePageState() : super(HomeController());
-
-  double get getMediaUnitHeightValue =>
-      MediaQuery.of(context).size.height * 0.01;
 
   @override
   Widget get view => Scaffold(
@@ -61,10 +59,10 @@ class HomePageState extends ViewState<HomePage, HomeController> {
       );
 
   Widget get _buildPageTitle => Text(
-        "Cotação",
+        ApplicationStrings.homePageTitle,
         style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
-            fontSize: 24,
+            fontSize: ApplicationDimens.fontSizePageTitle,
             fontWeight: FontWeight.bold),
       );
 
@@ -79,8 +77,8 @@ class HomePageState extends ViewState<HomePage, HomeController> {
               color: Colors.grey[700].withOpacity(.215),
               blurRadius: 80.0, // soften the shadow
               offset: const Offset(
-                5.0, // Move to right 10  horizontally
-                25.0, // Move to bottom 10 Vertically
+                5.0,
+                25.0,
               ),
             )
           ],

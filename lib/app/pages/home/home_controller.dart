@@ -18,7 +18,6 @@ class HomeController extends Controller {
   List<CryptocurrencyEntity> cryptocurrencyEntities = [];
   Map<int, CryptocurrencyQuoteEntity> cryptocurrencyQuotesEntitiesCachedById =
       {};
-  bool _cryptocurrencyQuoteAlreadyLoaded = false;
 
   @override
   void onDisposed() {
@@ -74,7 +73,6 @@ class HomeController extends Controller {
           cryptocurrency.cryptocurrencyId);
     }
     refreshUI();
-    _schedulePeriodicUIRefresh();
   }
 
   void getCryptocurrencyQuoteByCryptocurrencyIdOnComplete() {
@@ -90,12 +88,14 @@ class HomeController extends Controller {
 
   void getCryptocurrencyQuoteByCryptocurrencyIdOnNext(
       CryptocurrencyQuoteEntity cryptocurrencyQuoteEntityData) {
-    cryptocurrencyQuotesEntitiesCachedById[cryptocurrencyQuoteEntityData
-        .crytocurrencyId] = cryptocurrencyQuoteEntityData;
+    final lastCryptocurrencyQuotesEntity =
+        cryptocurrencyQuotesEntitiesCachedById[
+            cryptocurrencyQuoteEntityData.crytocurrencyId];
 
-    if (_cryptocurrencyQuoteAlreadyLoaded == false) {
+    if (lastCryptocurrencyQuotesEntity != cryptocurrencyQuoteEntityData) {
+      cryptocurrencyQuotesEntitiesCachedById[cryptocurrencyQuoteEntityData
+          .crytocurrencyId] = cryptocurrencyQuoteEntityData;
       refreshUI();
-      _cryptocurrencyQuoteAlreadyLoaded = true;
     }
   }
 
@@ -115,12 +115,6 @@ class HomeController extends Controller {
   void _scheduleNextHeartbeat() {
     Timer(const Duration(seconds: 30), () {
       presenter.sendHeartbeat();
-    });
-  }
-
-  void _schedulePeriodicUIRefresh() {
-    Timer.periodic(const Duration(seconds: 5), (timer) {
-      refreshUI();
     });
   }
 }

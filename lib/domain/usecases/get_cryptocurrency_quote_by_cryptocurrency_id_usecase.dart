@@ -19,7 +19,7 @@ class GetCryptocurrencyQuoteByCryptocurrencyIdUseCase extends UseCase<
 
     try {
       final Stream<CryptocurrencyQuoteEntity> cryptocurrencyQuoteStream =
-          _repository.subscribeCryptocurrencyQuoteByCryptocurrencyId(
+          _repository.getCryptocurrencyQuoteByCryptocurrencyId(
               params.cryptocurrencyId);
       streamController.addStream(cryptocurrencyQuoteStream);
     } catch (e) {

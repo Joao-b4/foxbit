@@ -1,7 +1,12 @@
 class CryptocurrencyQuoteEntity {
   CryptocurrencyQuoteEntity(
-      {this.currentQuote, this.rolling24HrVolume, this.rolling24HrQuoteChange});
+      {this.crytocurrencyId,
+      this.currentQuote,
+      this.rolling24HrVolume,
+      this.rolling24HrQuoteChange});
 
+  // InstrumentId
+  final int crytocurrencyId;
   // LastTradedPx
   final double currentQuote;
   // Rolling24HrVolume

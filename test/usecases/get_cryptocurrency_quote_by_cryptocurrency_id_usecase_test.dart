@@ -26,8 +26,8 @@ void main() {
   test(
       'Validate correct execution and return correct data from repository when GetCryptocurrencyQuoteByCryptocurrencyIdUseCase is called with success',
       () async {
-    when(repository.subscribeCryptocurrencyQuoteByCryptocurrencyId(
-            params.cryptocurrencyId))
+    when(repository
+            .getCryptocurrencyQuoteByCryptocurrencyId(params.cryptocurrencyId))
         .thenAnswer((_) => Stream.value(getSubscribeLeve1Mock));
     usecase.execute(observer, params);
     while (!observer.ended) {
@@ -42,8 +42,8 @@ void main() {
   test(
       'Should return a Exception on observer.error when GetCryptocurrencyQuoteByCryptocurrencyIdUseCase is called with error',
       () async {
-    when(repository.subscribeCryptocurrencyQuoteByCryptocurrencyId(
-            params.cryptocurrencyId))
+    when(repository
+            .getCryptocurrencyQuoteByCryptocurrencyId(params.cryptocurrencyId))
         .thenThrow(Exception("Generic Error"));
     usecase.execute(observer, params);
     while (!observer.ended) {

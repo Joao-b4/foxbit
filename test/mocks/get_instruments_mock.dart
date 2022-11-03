@@ -1,7 +1,9 @@
 import 'package:foxbit_hiring_test_template/domain/entities/cryptocurrency_entity.dart';
 
-List<CryptocurrencyEntity> get getInstrumentsMock =>
-    [CryptocurrencyEntity(cryptocurrencyId: 1, name: "BTC/BRL", orderIndex: 0)];
+List<CryptocurrencyEntity> get getInstrumentsMock => [
+      CryptocurrencyEntity(
+          cryptocurrencyId: 1, symbol: "BTC/BRL", orderIndex: 0)
+    ];
 
 String get getInstrumentsResponseMock =>
     '{"m": 0, "i": 0, "n": "getInstruments", "o": "$_responseFieldOMock" }';

@@ -43,7 +43,7 @@ void main() {
         'Should return a Stream<CryptocurrencyQuoteEntity> when subscribeCryptocurrencyQuoteByCryptocurrencyId is called with success',
         () async {
       final Stream<CryptocurrencyQuoteEntity> result =
-          repository.subscribeCryptocurrencyQuoteByCryptocurrencyId(1);
+          repository.getCryptocurrencyQuoteByCryptocurrencyId(1);
       expect(await result.isEmpty, false);
     });
 
@@ -56,7 +56,7 @@ void main() {
               WSEventNameMapper
                   .subscribeCryptocurrencyQuoteByCryptocurrencyId[0],
               2);
-      expectLater(repository.subscribeCryptocurrencyQuoteByCryptocurrencyId(1),
+      expectLater(repository.getCryptocurrencyQuoteByCryptocurrencyId(1),
           emitsError(isA<Exception>()));
     });
   });

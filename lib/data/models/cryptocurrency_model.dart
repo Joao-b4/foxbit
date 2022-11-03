@@ -6,15 +6,15 @@ import 'package:foxbit_hiring_test_template/domain/entities/cryptocurrency_entit
 class CryptocurrencyModel extends CryptocurrencyEntity {
   CryptocurrencyModel({
     this.instrumentId,
-    this.symbol,
+    this.product1Symbol,
     this.sortIndex,
   }) : super(
             cryptocurrencyId: instrumentId,
-            name: symbol,
+            symbol: product1Symbol,
             orderIndex: sortIndex);
 
   final int instrumentId;
-  final String symbol;
+  final String product1Symbol;
   final int sortIndex;
 
   CryptocurrencyModel copyWith({
@@ -24,7 +24,7 @@ class CryptocurrencyModel extends CryptocurrencyEntity {
   }) {
     return CryptocurrencyModel(
       instrumentId: instrumentId ?? this.instrumentId,
-      symbol: symbol ?? this.symbol,
+      product1Symbol: symbol ?? this.symbol,
       sortIndex: sortIndex ?? this.sortIndex,
     );
   }
@@ -32,16 +32,16 @@ class CryptocurrencyModel extends CryptocurrencyEntity {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'InstrumentId': instrumentId,
-      'Symbol': symbol,
+      'Product1Symbol': symbol,
       'SortIndex': sortIndex,
     };
   }
 
   factory CryptocurrencyModel.fromMap(Map<dynamic, dynamic> map) {
     return CryptocurrencyModel(
-      instrumentId: map['InstrumentId'] as int,
-      symbol: map['Symbol'] as String,
-      sortIndex: map['SortIndex'] as int,
+      instrumentId: (map['InstrumentId'] as num).toInt(),
+      product1Symbol: map['Product1Symbol'] as String,
+      sortIndex: (map['SortIndex'] as num).toInt(),
     );
   }
 

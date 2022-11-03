@@ -3,6 +3,6 @@ import 'package:foxbit_hiring_test_template/domain/entities/cryptocurrency_quote
 
 abstract class ICryptocurrencyRepository {
   Future<List<CryptocurrencyEntity>> getAll();
-  Stream<CryptocurrencyQuoteEntity>
-      subscribeCryptocurrencyQuoteByCryptocurrencyId(int cryptocurrencyId);
+  Stream<CryptocurrencyQuoteEntity> getCryptocurrencyQuoteByCryptocurrencyId(
+      int cryptocurrencyId);
 }

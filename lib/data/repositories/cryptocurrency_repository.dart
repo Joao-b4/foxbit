@@ -29,8 +29,8 @@ class CryptocurrencyRepository implements ICryptocurrencyRepository {
   }
 
   @override
-  Stream<CryptocurrencyQuoteEntity>
-      subscribeCryptocurrencyQuoteByCryptocurrencyId(int cryptocurrencyId) {
+  Stream<CryptocurrencyQuoteEntity> getCryptocurrencyQuoteByCryptocurrencyId(
+      int cryptocurrencyId) {
     try {
       _websocket.send(
           WSEventNameMapper.subscribeCryptocurrencyQuoteByCryptocurrencyId[0],

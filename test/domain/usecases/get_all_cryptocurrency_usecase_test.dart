@@ -4,8 +4,8 @@ import 'package:foxbit_hiring_test_template/domain/entities/cryptocurrency_entit
 import 'package:foxbit_hiring_test_template/domain/usecases/get_all_cryptocurrency_usecase.dart';
 import 'package:mockito/mockito.dart';
 
-import '../mocks/get_instruments_mock.dart';
-import '../utils/default_test_observer.dart';
+import '../../mocks/get_instruments_mock.dart';
+import '../../utils/default_test_observer.dart';
 
 class MockCryptocurrencyRepository extends Mock
     implements CryptocurrencyRepository {}

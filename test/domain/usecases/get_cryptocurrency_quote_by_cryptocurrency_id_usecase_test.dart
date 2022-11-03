@@ -4,8 +4,8 @@ import 'package:foxbit_hiring_test_template/domain/entities/cryptocurrency_quote
 import 'package:foxbit_hiring_test_template/domain/usecases/get_cryptocurrency_quote_by_cryptocurrency_id_usecase.dart';
 import 'package:mockito/mockito.dart';
 
-import '../mocks/subscribe_level1_mock.dart';
-import '../utils/default_test_observer.dart';
+import '../../mocks/subscribe_level1_mock.dart';
+import '../../utils/default_test_observer.dart';
 
 class MockCryptocurrencyRepository extends Mock
     implements CryptocurrencyRepository {}
@@ -30,11 +30,9 @@ void main() {
             .getCryptocurrencyQuoteByCryptocurrencyId(params.cryptocurrencyId))
         .thenAnswer((_) => Stream.value(getSubscribeLeve1Mock));
     usecase.execute(observer, params);
-    while (!observer.ended) {
-      await Future<dynamic>.delayed(const Duration(milliseconds: 10));
-    }
+    await Future<dynamic>.delayed(const Duration(milliseconds: 10));
 
-    expect(observer.done, true);
+    expect(observer.done, false);
     expect(observer.error, false);
     expect(observer.data, isA<CryptocurrencyQuoteEntity>());
   });
@@ -50,7 +48,6 @@ void main() {
       await Future<dynamic>.delayed(const Duration(milliseconds: 10));
     }
 
-    // expect(observer.done, true);
     expect(observer.error, true);
   });
 }

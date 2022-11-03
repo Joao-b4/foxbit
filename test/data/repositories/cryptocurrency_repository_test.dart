@@ -3,8 +3,8 @@ import 'package:foxbit_hiring_test_template/data/repositories/cryptocurrency_rep
 import 'package:foxbit_hiring_test_template/domain/entities/cryptocurrency_entity.dart';
 import 'package:foxbit_hiring_test_template/domain/entities/cryptocurrency_quote_entity.dart';
 
-import '../connections/test_websocket.dart';
-import '../mocks/empty_response_mock.dart';
+import '../../connections/test_websocket.dart';
+import '../../mocks/empty_response_mock.dart';
 
 void main() {
   TestFoxbitWebSocket webSocket;
@@ -38,26 +38,13 @@ void main() {
     });
   });
 
-  group("SubscribeCryptocurrencyQuoteByCryptocurrencyId Tests", () {
+  group("GetCryptocurrencyQuoteByCryptocurrencyId Tests", () {
     test(
-        'Should return a Stream<CryptocurrencyQuoteEntity> when subscribeCryptocurrencyQuoteByCryptocurrencyId is called with success',
+        'Should return a Stream<CryptocurrencyQuoteEntity> when GetCryptocurrencyQuoteByCryptocurrencyId is called with success',
         () async {
       final Stream<CryptocurrencyQuoteEntity> result =
           repository.getCryptocurrencyQuoteByCryptocurrencyId(1);
       expect(await result.isEmpty, false);
-    });
-
-    test(
-        'Should return a Exception when subscribeCryptocurrencyQuoteByCryptocurrencyId is called with error',
-        () async {
-      webSocket.responses[WSEventNameMapper
-              .subscribeCryptocurrencyQuoteByCryptocurrencyId[0]] =
-          mountEmptyResponse(
-              WSEventNameMapper
-                  .subscribeCryptocurrencyQuoteByCryptocurrencyId[0],
-              2);
-      expectLater(repository.getCryptocurrencyQuoteByCryptocurrencyId(1),
-          emitsError(isA<Exception>()));
     });
   });
 }

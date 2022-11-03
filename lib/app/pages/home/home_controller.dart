@@ -82,7 +82,6 @@ class HomeController extends Controller {
   }
 
   void getCryptocurrencyQuoteByCryptocurrencyIdOnError(dynamic e) {
-    debugPrint("[getCryptocurrencyQuoteByCryptocurrencyIdOnError] $e");
     ScaffoldMessenger.of(getStateKey().currentContext).showSnackBar(
         const SnackBar(
             duration: Duration(seconds: 10),
@@ -91,7 +90,6 @@ class HomeController extends Controller {
 
   void getCryptocurrencyQuoteByCryptocurrencyIdOnNext(
       CryptocurrencyQuoteEntity cryptocurrencyQuoteEntityData) {
-    debugPrint("[getCryptocurrencyQuoteByCryptocurrencyIdOnNext]");
     cryptocurrencyQuotesEntitiesCachedById[cryptocurrencyQuoteEntityData
         .crytocurrencyId] = cryptocurrencyQuoteEntityData;
 

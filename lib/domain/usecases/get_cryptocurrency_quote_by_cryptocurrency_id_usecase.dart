@@ -25,9 +25,6 @@ class GetCryptocurrencyQuoteByCryptocurrencyIdUseCase extends UseCase<
     } catch (e) {
       streamController.addError(e);
     }
-    //  finally {
-    //   streamController.close();
-    // }
     return streamController.stream;
   }
 }

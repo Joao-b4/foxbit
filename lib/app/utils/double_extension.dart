@@ -3,7 +3,7 @@ import 'package:intl/intl.dart' as intl;
 extension DoubleExtension on double {
   static const String currencySymbol = 'R\$';
 
-  String formatToCurrency({int decimalDigits = 5}) {
+  String formatToCurrency({int decimalDigits = 3}) {
     return intl.NumberFormat.currency(
             symbol: this < 0 ? ' $currencySymbol' : currencySymbol,
             decimalDigits: decimalDigits,
